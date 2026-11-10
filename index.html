@@ -9,11 +9,11 @@
 <title>Where in the World</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IM+Fell+English+SC&family=IM+Fell+English:ital@1&family=Josefin+Sans:wght@300;600&family=Kalam:wght@300;400;700&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=IM+Fell+English+SC&family=IM+Fell+English:ital@1&family=Josefin+Sans:wght@300;600&family=Kalam:wght@300;400;700&family=Pinyon+Script&family=Emilys+Candy&family=Mountains+of+Christmas:wght@700&display=swap">
 <style>
 /* Layout: full-bleed globe on watercolor paper; masthead top-left; ruled travel journal docked right (tucks away to a bookmark); stamp toolbar bottom-center; postcards open as a flippable card over everything */
 :root{
-  --paper:#F1F1EF; --wash-pink:#F5D3D3; --wash-blue:#D6EAEB; --bg-tint:linear-gradient(transparent, transparent);
+  --paper:#F1F1EF; --wash-pink:#F5D3D3; --wash-blue:#D6EAEB; --bg-tint:linear-gradient(transparent, transparent); --title-ink:#22305C; --title-edge:rgba(34,48,92,.45); --title-star:#E57FA8;
   --ink:#3D3350; --ink-soft:#7A6D84;
   --ocean:#BCDDE0; --ocean-deep:#88BDC6; --ocean-ink:#4E8996;
   --land-0:#CFE2AE; --land-1:#BBD8A0; --land-2:#DDE8B6; --land-3:#C3DDB7; --land-4:#D3E4C2;
@@ -30,6 +30,8 @@
   --scrim:rgba(61,51,80,.38);
   --postcard:#F4EFE4; --post-ink:#2853A6; --post-hand:#2A2340; --photo-mat:#FFFDF8; --pc-cover:#EBD8BE; --pc-paper:#EEDCC3; --pc-band:#F4E6D1; --pc-ink:#26222B; --air-red:#C4313D; --air-blue:#2C3C8C; --air-gap:#FFFFFF;
   --font-script:'Pinyon Script','Snell Roundhand','Apple Chancery',cursive;
+  --font-candy:'Emilys Candy','Comic Sans MS',cursive;
+  --font-xmas:'Mountains of Christmas','Comic Sans MS',cursive;
   --font-hand:'Kalam','Segoe Print','Bradley Hand',cursive;
   --font-engrave:'IM Fell English SC','Iowan Old Style',Georgia,serif;
   --font-italic:'IM Fell English','Iowan Old Style',Georgia,serif;
@@ -38,7 +40,7 @@
   --wobble:255px 18px 225px 15px / 15px 225px 18px 255px;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --paper:#1D2043; --wash-pink:#3A2B55; --wash-blue:#1F3360; --bg-tint:linear-gradient(rgba(26,28,64,.84), rgba(26,28,64,.84));
+  --paper:#1D2043; --wash-pink:#3A2B55; --wash-blue:#1F3360; --bg-tint:linear-gradient(rgba(26,28,64,.84), rgba(26,28,64,.84)); --title-ink:#E6ECFA; --title-edge:rgba(230,236,250,.35); --title-star:#F6AECB;
   --ink:#F4E7EE; --ink-soft:#B6ABCB;
   --ocean:#355A7D; --ocean-deep:#22405F; --ocean-ink:#94BDD6;
   --land-0:#7E9B72; --land-1:#6F8E68; --land-2:#88A079; --land-3:#72907A; --land-4:#7D9880;
@@ -57,7 +59,7 @@
   color-scheme:dark;
 }}
 :root[data-theme="dark"]{
-  --paper:#1D2043; --wash-pink:#3A2B55; --wash-blue:#1F3360; --bg-tint:linear-gradient(rgba(26,28,64,.84), rgba(26,28,64,.84));
+  --paper:#1D2043; --wash-pink:#3A2B55; --wash-blue:#1F3360; --bg-tint:linear-gradient(rgba(26,28,64,.84), rgba(26,28,64,.84)); --title-ink:#E6ECFA; --title-edge:rgba(230,236,250,.35); --title-star:#F6AECB;
   --ink:#F4E7EE; --ink-soft:#B6ABCB;
   --ocean:#355A7D; --ocean-deep:#22405F; --ocean-ink:#94BDD6;
   --land-0:#7E9B72; --land-1:#6F8E68; --land-2:#88A079; --land-3:#72907A; --land-4:#7D9880;
@@ -118,9 +120,16 @@ body{
 .masthead{position:absolute; top:22px; left:max(28px, env(safe-area-inset-left, 0px)); z-index:3; pointer-events:none; max-width:min(460px, calc(100% - 32px))}
 .dateline{font-family:var(--font-engrave); font-size:12.5px; letter-spacing:.2em; color:var(--ink); text-shadow:0 0 6px var(--label-halo); display:flex; align-items:center; gap:10px; animation:rise .8s ease-out both .2s}
 .dateline svg{flex:none}
-.title{font-family:var(--font-script); font-weight:400; font-size:clamp(46px, 6.4vw, 84px); line-height:.95; margin:6px 0 0 -4px; position:relative; text-wrap:balance}
-.title span{display:inline-block; position:relative; padding:0 .12em .1em 0; animation:write 2.1s cubic-bezier(.55,.1,.3,1) both .35s}
-.title::before{content:""; position:absolute; left:-.2em; top:.28em; width:3.4em; height:.7em; z-index:-1; background:var(--been); opacity:.42; border-radius:48% 52% 44% 56% / 60% 42% 58% 40%; filter:blur(1.5px); transform-origin:left; animation:swash 1.2s ease-out both 1.3s}
+.title{font-weight:400; font-size:clamp(50px, 6.4vw, 88px); line-height:1.04; margin:.12em 0 0 -2px; position:relative; color:var(--title-ink)}
+.title .ln{display:block; white-space:nowrap}
+.title .sp{display:inline-block; width:.26em}
+.lt{display:inline-block; position:relative; transform:translateY(var(--y, 0)) rotate(var(--r, 0deg)); text-shadow:0 0 1px var(--title-edge), 0 0 .6px var(--title-edge); animation:letterIn .75s cubic-bezier(.3,1.6,.5,1) both; animation-delay:calc(.3s + var(--i) * 60ms)}
+.lt.c{font-family:var(--font-candy); font-size:.86em}
+.lt.x{font-family:var(--font-xmas); font-weight:700}
+.idot{position:absolute; left:50%; top:.04em; width:.27em; height:.27em; margin-left:-.135em; color:var(--title-star); animation:twinkleStar 3.2s ease-in-out infinite 1.6s}
+.idot svg{display:block; width:100%; height:100%}
+@keyframes letterIn{from{opacity:0; transform:translateY(-.6em) rotate(calc(var(--r, 0deg) - 28deg)) scale(.5)}}
+@keyframes twinkleStar{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(45deg) scale(1.25)}}
 .stickers{position:absolute; left:8px; top:calc(100% + 4px); width:160px; height:70px}
 .st{position:absolute; width:54px; height:auto; filter:drop-shadow(1px 2px 1px rgba(40,30,20,.25)); animation:stickOn .6s cubic-bezier(.3,1.7,.5,1) both, stickFloat 5s ease-in-out infinite}
 .st.s1{left:0; top:6px; --r:-8deg; animation-delay:2.2s, 2.8s}
@@ -359,7 +368,7 @@ body{
 
 @media (max-width: 900px){
   .masthead{top:14px; left:max(18px, env(safe-area-inset-left, 0px)); max-width:calc(100% - 150px)}
-  .title{font-size:clamp(40px, 11vw, 58px)}
+  .title{font-size:clamp(42px, 12vw, 60px)}
   .stickers{width:110px; height:44px; left:4px; top:calc(100% + 2px)}
   .st{width:32px} .st.s1{top:4px} .st.s2{left:32px; top:12px} .st.s3{left:64px; top:0}
   .journal{top:auto; left:max(10px, env(safe-area-inset-left, 0px)); right:max(10px, env(safe-area-inset-right, 0px)); width:auto; bottom:0; max-height:66%; border-radius:16px 18px 0 0; transform:translateY(105%); transition:transform .45s cubic-bezier(.3,1.2,.5,1); animation:none; z-index:7}
@@ -421,7 +430,7 @@ body{
     <div class="dateline"><span id="dateline">A TRAVEL LOG</span>
       <svg width="64" height="8" viewBox="0 0 64 8" aria-hidden="true"><path d="M1 5 Q9 1 17 4 T33 4 T49 4 T63 3" fill="none" stroke="var(--path)" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="4 3"/></svg>
     </div>
-    <h1 class="title"><span>Where in the World</span></h1>
+    <h1 class="title" aria-label="Where in the World"><span aria-hidden="true"><span class="ln"><span class="lt c" style="--i:0;--r:-4deg;--y:-.02em">W</span><span class="lt x" style="--i:1;--r:3deg;--y:.03em">h</span><span class="lt c" style="--i:2;--r:-2deg;--y:.06em">e</span><span class="lt x" style="--i:3;--r:4deg;--y:0em">r</span><span class="lt x" style="--i:4;--r:-3deg;--y:.04em">e</span><span class="sp"></span><span class="lt x" style="--i:5;--r:2deg;--y:-.02em">ı<span class="idot" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1.5v17M1.5 10h17M4 4l12 12M16 4 4 16" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span></span><span class="lt c" style="--i:6;--r:-3deg;--y:.05em">n</span></span><span class="ln"><span class="lt x" style="--i:7;--r:-4deg;--y:.02em">t</span><span class="lt c" style="--i:8;--r:3deg;--y:.04em">h</span><span class="lt x" style="--i:9;--r:-2deg;--y:0em">e</span><span class="sp"></span><span class="lt c" style="--i:10;--r:3deg;--y:-.03em">W</span><span class="lt x" style="--i:11;--r:-3deg;--y:.06em">o</span><span class="lt c" style="--i:12;--r:2deg;--y:.02em">r</span><span class="lt x" style="--i:13;--r:-3deg;--y:-.02em">l</span><span class="lt c" style="--i:14;--r:4deg;--y:.04em">d</span></span></span></h1>
   </header>
 
   <button class="jtoggle" id="jtoggle" aria-controls="journal" aria-expanded="false">
