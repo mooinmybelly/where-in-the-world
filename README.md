@@ -19,15 +19,6 @@ Your globe saves in your own web browser.
 - Saves stay in that browser on that device. Nobody else can see them.
 - Clearing your browser's site data deletes your globe, so use **Export backup** in the journal now and then. **Import backup** loads a backup on another device or browser.
 
-## Putting it online with GitHub Pages
-
-1. Create a new repository on GitHub and upload every file in this folder (keep them all in the top level).
-2. Go to **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**, pick `main` and `/ (root)`, and save.
-4. After a minute or two the site is live at `https://<your-username>.github.io/<repository-name>/`.
-
-Opening `index.html` straight from your computer mostly works, but the browser blocks the search list and close-up map layers on files opened that way. To test it locally, run `python3 -m http.server` in this folder and open `http://localhost:8000`.
-
 ## Credits
 
 - Country shapes, rivers, lakes and city areas: [Natural Earth](https://www.naturalearthdata.com/) (public domain), via [world-atlas](https://github.com/topojson/world-atlas).
